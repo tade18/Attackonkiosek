@@ -1,26 +1,25 @@
+import { Character } from "./characters/Character.js";
+import { Background } from "./ui/basic-utils.js";
+const background = new Background();
+console.log(background);
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-
+//KLÁVESNICE
 const keys = {};
-
 document.addEventListener("keydown", (e) => {
     keys[e.code] = true;
 });
-
 const resizeCanvas = () => {
     canvas.width = 1280;
     canvas.height = 720;
 };
 const clearCanvas = () => {
-    ctx.fillStyle = "white";
-    ctx.fillRect(0,0,1280,720);
+    background.draw(ctx);
 };
 const update = () => {};
 const render = () => {};
 const getFps = () => {};
-
-
-//loop
+//LOOP
 const gameLoop = () =>{
     //resizeCanvas
     resizeCanvas();
@@ -32,18 +31,14 @@ const gameLoop = () =>{
     render();
     //fps
     getFps();
-
     window.requestAnimationFrame(gameLoop);
 }
 
 
-//window.onload = po načtení stránky
+//WINDOWS.ONLOAD = po načtení stránky
 window.onload = () => {
     window.requestAnimationFrame(gameLoop);
 }
-
-
-
 
 
 //ARRAY
