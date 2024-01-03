@@ -1,5 +1,6 @@
 import { Character } from "./characters/Character.js";
 import { Background } from "./ui/basic-utils.js";
+const Frafta = new Character("Frafta", 10000, 1, 0.1, 0);
 const background = new Background();
 console.log(background);
 const canvas = document.getElementById("canvas");
@@ -9,6 +10,9 @@ const keys = {};
 document.addEventListener("keydown", (e) => {
     keys[e.code] = true;
 });
+document.addEventListener("keyup", (e) => {
+    keys[e.code] = false;
+});
 const resizeCanvas = () => {
     canvas.width = 1280;
     canvas.height = 720;
@@ -16,8 +20,20 @@ const resizeCanvas = () => {
 const clearCanvas = () => {
     background.draw(ctx);
 };
-const update = () => {};
-const render = () => {};
+const update = () => {
+    if(Frafta.position.x >= 640){
+        Frafta.update(1);
+        Frafta.hp-=100;
+        console.log(Frafta.hp)
+        if(Frafta.hp <= 0){
+            Frafta.update(2);
+        }
+    }
+    else{
+        Frafta.update(0);
+    }
+};
+const render = () => {Frafta.draw(ctx)};
 const getFps = () => {};
 //LOOP
 const gameLoop = () =>{
@@ -31,6 +47,7 @@ const gameLoop = () =>{
     render();
     //fps
     getFps();
+    //zažádáme si snímek z funkce gameloop
     window.requestAnimationFrame(gameLoop);
 }
 
