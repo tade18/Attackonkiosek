@@ -6,11 +6,10 @@ import { Background } from "./ui/basic-utils.js";
 /*Postavy pro hráče*/
 const friendly = [];
 /*Postavy pro pc*/
-const enemy = [];
+const enemies = [];
 
 //POZADÍ-------------------------------------------
 const background = new Background();
-console.log(background);
 
 //CANVAS-------------------------------------------
 const canvas = document.getElementById("canvas");
@@ -36,29 +35,24 @@ const clearCanvas = () => {
 
 //UPDATE-------------------------------------------
 const update = () => {
-    Frafta.update(0);
-    unrealurbic.update(0);
-    /*if(Frafta.position.x >= 640){
-        Frafta.update(1);
-        //Frafta.hp-=100;
-        console.log(Frafta.hp)
-        if(Frafta.hp <= 0){
-            Frafta.update(2);
-        }
-    }
-    else{
-        Frafta.update(0);
-    }*/
+    detectCollision();
 };
+//KOLIZE-------------------------------------------
+const detectCollision = () => {
+    friendly.map((a) => {
+        enemies.map((b) => {
+            Character.detectCollison(a,b);
+        });
+    });
+}
 
 //RENDER-----------------------------------------
 const render = () => {
-    /*a = postava která je v poli nařadě*/
-        friendly.map((a)=>{
-            a.draw(ctx);
+        friendly.map((c)=>{
+            c.draw(ctx);
         })
-        enemies.map((a)=>{
-            a.draw(ctx);
+        enemies.map((c)=>{
+            c.draw(ctx);
         })
 };
 const getFps = () => {};
